@@ -73,3 +73,29 @@ By clearing the timer in the return function of useEffect, you ensure that the t
 ```
 
 ## Performance:
+
+## Challenges of Live chat
+
+- get data live
+- update the UI live
+
+---
+
+- LIVE DATA HANDLING -> 1) web sockets 2) API Polling
+
+  - web sockets
+
+    - there is handshake between ui and server.
+    - its two way communication you can send data from ui to server and server to ui
+    - there is no regular interveral one data can come after 200ms and another may come after 10sec.
+    - its used when order of data matters and data should come quickly
+    - its used when order of data matters
+    - eg: chatapps, zerodha(treding apps, stock market)
+
+  - API Polling
+    - data flow in unidirectional (server to ui)
+    - there is regular interval at which data is comming.
+    - its used when data fetching at regular interval can give user realtime experience.
+    - eg: crickbuzz, Gmail
+
+![image](https://github.com/MazharSolkar/akshay-react-course/assets/86589812/92e6814c-2541-4dd2-9ee5-7a9c1a02c2f4)

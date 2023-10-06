@@ -1,36 +1,63 @@
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiFillYoutube, AiOutlineSearch } from 'react-icons/ai';
 import { BiSolidUserCircle } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { useEffect, useState } from 'react';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
+import { cacheResults } from '../utils/SearchSlice';
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  const searchCache = useSelector((store) => store.searchSlice);
+  const dispatch = useDispatch();
+
+  // ===================Cache================
+
+  /**
+   * searchCache = {
+   *    "iphone": ["iphone 11","iphone 14"]
+   * }
+   * searchQuery = iphone
+   */
+
+  // ===================Cache================
+
   const getSearchSuggestions = async () => {
-    console.log('API Call : ', searchQuery);
+    // console.log('API Call : ', searchQuery);
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
     // console.log(json[1]);
     setSuggestions(json[1]);
+
+    // update cache
+    dispatch(
+      cacheResults({
+        [searchQuery]: json[1],
+      })
+    );
   };
 
   useEffect(() => {
     // Make an api call after evey key press
     //  But if the difference between 2 API calls is <200ms
     //  Decline the API call
-    const timer = setTimeout(() => getSearchSuggestions(), 200);
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        getSearchSuggestions();
+      }
+    }, 200);
 
     return () => {
       clearTimeout(timer);
     };
   }, [searchQuery]);
 
-  const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
