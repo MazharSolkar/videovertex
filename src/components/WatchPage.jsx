@@ -8,8 +8,8 @@ const WatchPage = () => {
   //   console.log(params);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams);
-  console.log(searchParams.get('v'));
+  //   console.log(searchParams);
+  //   console.log(searchParams.get('v'));
 
   const dispatch = useDispatch();
 
@@ -19,9 +19,8 @@ const WatchPage = () => {
   return (
     <div>
       <iframe
-        width='1200'
-        height='600'
-        src='https://www.youtube.com/embed/hXzcyx9V0xw?si=eXvWwY7HLIxnCyOg'
+        className='w-[100vw] h-[450px] lg:w-[1100px] lg:h-[550px]'
+        src={`https://www.youtube.com/embed/${searchParams.get('v')}`}
         title='YouTube video player'
         frameBorder='0'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'

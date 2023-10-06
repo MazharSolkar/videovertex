@@ -11,8 +11,8 @@ const Sidebar = () => {
   }
 
   return (
-    <div className='p-5 shadow-lg w-48 absolute bg-white h-full'>
-      <ul>
+    <div className='p-5 shadow-lg w-48 fixed top-16 bg-white h-full '>
+      <ul className='pt-4'>
         <li>
           <Link to='/'>Home</Link>
         </li>
