@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
-  const isMenuOpen = useSelector((store) => store.appSlice.isMenuOpen);
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
 
   // Early Return Pattern
   if (!isMenuOpen) {

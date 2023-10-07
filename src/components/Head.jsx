@@ -12,7 +12,7 @@ const Head = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  const searchCache = useSelector((store) => store.searchSlice);
+  const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
 
   // ===================Cache================
